@@ -14,16 +14,339 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      case_offenders: {
+        Row: {
+          case_id: string
+          created_at: string
+          offender_id: string
+        }
+        Insert: {
+          case_id: string
+          created_at?: string
+          offender_id: string
+        }
+        Update: {
+          case_id?: string
+          created_at?: string
+          offender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_offenders_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "case_offenders_offender_id_fkey"
+            columns: ["offender_id"]
+            isOneToOne: false
+            referencedRelation: "offenders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      case_updates: {
+        Row: {
+          case_id: string
+          created_at: string
+          created_by: string | null
+          id: string
+          update_text: string
+        }
+        Insert: {
+          case_id: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          update_text: string
+        }
+        Update: {
+          case_id?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          update_text?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_updates_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cases: {
+        Row: {
+          assigned_to: string | null
+          case_number: string
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          ob_entry_id: string | null
+          priority: string
+          station_id: string | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          case_number?: string
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          ob_entry_id?: string | null
+          priority?: string
+          station_id?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          case_number?: string
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          ob_entry_id?: string | null
+          priority?: string
+          station_id?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cases_ob_entry_id_fkey"
+            columns: ["ob_entry_id"]
+            isOneToOne: false
+            referencedRelation: "ob_entries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cases_station_id_fkey"
+            columns: ["station_id"]
+            isOneToOne: false
+            referencedRelation: "stations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ob_entries: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          incident_type: string
+          latitude: number | null
+          location: string | null
+          longitude: number | null
+          ob_number: string
+          occurred_at: string
+          recorded_by: string | null
+          reporter_contact: string | null
+          reporter_name: string | null
+          station_id: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: string
+          incident_type: string
+          latitude?: number | null
+          location?: string | null
+          longitude?: number | null
+          ob_number?: string
+          occurred_at?: string
+          recorded_by?: string | null
+          reporter_contact?: string | null
+          reporter_name?: string | null
+          station_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          incident_type?: string
+          latitude?: number | null
+          location?: string | null
+          longitude?: number | null
+          ob_number?: string
+          occurred_at?: string
+          recorded_by?: string | null
+          reporter_contact?: string | null
+          reporter_name?: string | null
+          station_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ob_entries_station_id_fkey"
+            columns: ["station_id"]
+            isOneToOne: false
+            referencedRelation: "stations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      offenders: {
+        Row: {
+          address: string | null
+          alias: string | null
+          created_at: string
+          created_by: string | null
+          date_of_birth: string | null
+          full_name: string
+          gender: string | null
+          id: string
+          national_id: string | null
+          notes: string | null
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          alias?: string | null
+          created_at?: string
+          created_by?: string | null
+          date_of_birth?: string | null
+          full_name: string
+          gender?: string | null
+          id?: string
+          national_id?: string | null
+          notes?: string | null
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          alias?: string | null
+          created_at?: string
+          created_by?: string | null
+          date_of_birth?: string | null
+          full_name?: string
+          gender?: string | null
+          id?: string
+          national_id?: string | null
+          notes?: string | null
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          badge_number: string | null
+          created_at: string
+          full_name: string
+          id: string
+          phone: string | null
+          rank: string | null
+          station_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          badge_number?: string | null
+          created_at?: string
+          full_name: string
+          id: string
+          phone?: string | null
+          rank?: string | null
+          station_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          badge_number?: string | null
+          created_at?: string
+          full_name?: string
+          id?: string
+          phone?: string | null
+          rank?: string | null
+          station_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_station_id_fkey"
+            columns: ["station_id"]
+            isOneToOne: false
+            referencedRelation: "stations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stations: {
+        Row: {
+          address: string | null
+          county: string | null
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          address?: string | null
+          county?: string | null
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          address?: string | null
+          county?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "investigator" | "officer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +473,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "investigator", "officer"],
+    },
   },
 } as const
